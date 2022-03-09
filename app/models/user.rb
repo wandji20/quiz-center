@@ -14,6 +14,13 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  has_many :answered_questions
+
+  def unanswered_questions_for_quiz
+    answered_question_ids = Question.joins(:answered_questions).pluck(:id)
+    Question.where.not(id: answered_question_ids)
+  end
+
   private
   def downcase_email
     self.email = email.downcase if email.present?

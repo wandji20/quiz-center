@@ -6,6 +6,7 @@ ruby '3.0.1'
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
 gem 'rubocop', '>= 1.0', '< 2.0'
+gem 'jwt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.7'
 # Use postgresql as the database for Active Record

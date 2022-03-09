@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  before_save :downcase_email
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -13,4 +13,9 @@ class User < ApplicationRecord
 
 
   has_secure_password
+
+  private
+  def downcase_email
+    self.email = email.downcase if email.present?
+  end
 end

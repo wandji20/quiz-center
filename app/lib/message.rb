@@ -1,6 +1,5 @@
 class Message
   class << self
-
     def invalid_credentials
       'Invalid credentials'
     end

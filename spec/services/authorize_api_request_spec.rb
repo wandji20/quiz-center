@@ -22,7 +22,7 @@ RSpec.describe AuthorizeApiRequest do
             .to raise_error(ExceptionHandler::MissingToken, Message.missing_token)
         end
       end
-      
+
       context 'invalid token' do
         let(:header) { valid_headers(5) }
         it 'raises InvalidToken error' do

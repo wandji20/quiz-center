@@ -1,20 +1,19 @@
 class AuthorizeApiRequest
-  attr_accessor :decoded_auth_token, :headers 
+  attr_accessor :headers
 
   def initialize(headers = {})
     @headers = headers
   end
 
   def self.call(headers = {})
-    self.new(headers).assign_user
+    new(headers).assign_user
   end
-  
+
   def assign_user
     {
       user: user
     }
   end
-
 
   def user
     @user ||= User.find(decoded_auth_token[:user_id])

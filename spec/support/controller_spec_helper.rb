@@ -1,5 +1,4 @@
 module ControllerSpecHelper
-
   def generate_token(id)
     JsonWebToken.encode(user_id: id)
   end
@@ -21,5 +20,4 @@ module ControllerSpecHelper
       'Content-Type': 'applicaton/json'
     }
   end
-  
 end

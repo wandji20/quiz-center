@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def create
     @user = User.new(user_params)
     if user.save
@@ -9,18 +8,14 @@ class UsersController < ApplicationController
       json_response({ errors: @user.errors.full_messages }, :unprocessable_entity)
     end
   end
-  
-  def show
-  end
-  
+
+  def show; end
+
   private
+
   def user_params
     params.require(:user).permit(
       :first_name, :last_name, :email, :password, :password_confirmation
     )
   end
-
-  def show
-  end
 end
-

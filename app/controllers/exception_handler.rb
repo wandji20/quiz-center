@@ -1,4 +1,6 @@
-class ExceptionHandler
+module ExceptionHandler
+  extend ActiveSupport::Concern
+  
   class AuthenticationError < StandardError
   end
 
@@ -13,11 +15,11 @@ class ExceptionHandler
     rescue_from ExceptionHandler::MissingToken, with: :unprocessed_request!
   end
 
-  def :unprocessed_request!(exception)
+  def unprocessed_request!(exception)
     json_response({ alert: exeption.message }, status: :unprocessable_entity)
   end
 
-  def :unauthorised_request!(exception)
+  def unauthorised_request!(exception)
     json_response({ alert: exeption.message }, status: :unauthorised)
   end
 

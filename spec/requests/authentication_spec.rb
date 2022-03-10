@@ -31,7 +31,7 @@ RSpec.describe "Authentications", type: :request do
       it "returns http unprocessable entity" do
         post login_path, params: invalid_attributes
         expect(response.body).to match(/Invalid credentials/)
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end

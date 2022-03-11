@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let(:valid_attributes) do
     {
-      user: { 
+      user: {
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         email: Faker::Internet.email,
@@ -15,15 +15,15 @@ RSpec.describe 'Users', type: :request do
 
   let(:invalid_attributes) do
     {
-      user: { 
+      user: {
         email: Faker::Internet.email,
         password: 'password',
         password_confirmation: 'password'
       }
     }
   end
-  let(:user) { create(:user)}
-  let(:header) { valid_headers(user.id)}
+  let(:user) { create(:user) }
+  let(:header) { valid_headers(user.id) }
   describe 'POST /create' do
     context 'valid attributes' do
       it 'returns http success' do
@@ -54,5 +54,4 @@ RSpec.describe 'Users', type: :request do
   #     expect(response).to have_http_status(:success)
   #   end
   # end
-
 end

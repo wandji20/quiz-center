@@ -1,5 +1,4 @@
 class AnsweredQuestionsController < ApplicationController
-
   def create
     @answered_question = current_user.answered_questions.build(answered_question_params)
     if @answered_question.save
@@ -9,7 +8,7 @@ class AnsweredQuestionsController < ApplicationController
       json_response({ notice: 'question timer started', question: answered_question }, :created)
     else
       json_response(
-        { errors: @answered_question.errors.full_messages }, 
+        { errors: @answered_question.errors.full_messages },
         :unprocessable_entity
       )
     end
@@ -27,8 +26,8 @@ class AnsweredQuestionsController < ApplicationController
   end
 
   private
+
   def answered_question_params
     params.require(:answered_question).permit(:question_id, :answer_id)
   end
-
 end

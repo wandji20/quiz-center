@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :name, :unanswered_questions, :avatar
-  
+
   def name
     object.name
   end

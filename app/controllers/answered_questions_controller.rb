@@ -24,6 +24,9 @@ class AnsweredQuestionsController < ApplicationController
       answered_question_params.slice(:answer_id, {}).merge!(id: params[:id])
     )
     if outcome.valid?
+      ActionCable.server.broadcast(
+        "answered_question_#{params[:id]}", { notice: 'saved' }
+      )
       json_response({ notice: 'saved' })
     else
       json_response({ errors: outcome.errors }, :unprocessable_entity)

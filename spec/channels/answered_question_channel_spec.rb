@@ -29,15 +29,13 @@ RSpec.describe AnsweredQuestionChannel, type: :channel do
     subscribe(id: answered_question.id)
 
     expect(subscription).to be_confirmed
-    expect(subscription).to have_stream_from("answered_question_#{answered_question.user_id}")
+    expect(subscription).to have_stream_from("answered_question_#{answered_question.id}")
   end
 
 
   it "does not subscribe to a stream when answered question id is not provided" do
-    subscribe(room_id: 42)
-
-    # check particular stream by name
-    expect(subscription).to have_stream_from("answered_question_#{answered_question.id}")
+    subscribe(id: 'abc')
+    expect(subscription).to_not have_stream_from("answered_question_#{answered_question.id}")
 
   end
 end

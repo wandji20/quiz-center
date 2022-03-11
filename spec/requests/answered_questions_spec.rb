@@ -78,6 +78,16 @@ RSpec.describe "AnsweredQuestions", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
+
+    context 'exceded time limit' do
+      it "returns http unprocessable entity" do
+        answered_question.question.update(points: 0)
+        sleep 1
+        put answered_question_path(answered_question), params: valid_attributes, headers: header, as: :json
+        expect(response.body).to match(/time limit exceeded/)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
   end
 
 end

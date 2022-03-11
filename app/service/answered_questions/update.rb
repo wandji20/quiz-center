@@ -7,7 +7,7 @@ module AnsweredQuestions
     def initialize(id, answer_id)
       @answer_id = answer_id
       @id = id
-      @errors = {}
+      @errors = []
     end
     
     def self.call(attributes = {})
@@ -19,7 +19,6 @@ module AnsweredQuestions
     def valid?
       errors.none?
     end
-
     
     def update_answered_question
       set_answered_question
@@ -32,7 +31,7 @@ module AnsweredQuestions
         if answered_question.update(payload)
           @result = answered_question
         else
-          errors.merge!(answered_question.errors)
+          errors.concat(answered_question.errors.full_messages)
         end
       end
       self
@@ -42,16 +41,14 @@ module AnsweredQuestions
     def set_answer
       if answered_question
         @answer = answered_question.question.answers.find_by id: answer_id
-        errors.merge!(base: 'valid question answer must be present') unless @answer
+        errors.push('valid question answer must be present') unless @answer
       end
     end
 
     def set_answered_question
       @answered_question = AnsweredQuestion.find_by id: id
 
-      errors.merge!(
-        base: 'answered question not found'
-      ) unless answered_question
+      errors.push('answered question not found') unless answered_question
     end
 
   end

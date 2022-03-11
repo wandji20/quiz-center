@@ -16,10 +16,19 @@ class AnsweredQuestionsController < ApplicationController
   end
 
   def update
+    outcome = AnsweredQuestions::Update.call(
+      answered_question_params.slice(:answer_id, {}).merge!(id: params[:id])
+    )
+    if outcome.valid?
+      json_response({ notice: 'saved' })
+    else
+      json_response({ errors: outcome.errors }, :unprocessable_entity)
+    end
   end
 
   private
   def answered_question_params
     params.require(:answered_question).permit(:question_id, :answer_id)
   end
+
 end

@@ -5,6 +5,7 @@ ruby '3.0.1'
 
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
+gem 'jwt'
 gem 'rubocop', '>= 1.0', '< 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.7'
@@ -26,7 +27,7 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'

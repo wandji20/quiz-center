@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# quiz = Quiz.create!(title: 'culture')
+# question = Question.create!(quiz: Quiz.first, 
+#   description: 'Which number is divisible by 2 and 3', 
+#   answers_attributes: [
+#   { value: 1 },
+#   { value: 2 },
+#   { value: 3 },
+#   { value: 6, is_correct: true },
+#   { value: 4 }
+# ])

@@ -15,9 +15,13 @@ class User < ApplicationRecord
 
   has_many :answered_questions
 
-  def unanswered_questions_for_quiz
-    answered_question_ids = Question.joins(:answered_questions).pluck(:id)
+  def unanswered_questions
+    answered_question_ids = answered_questions.pluck(:question_id)
     Question.where.not(id: answered_question_ids)
+  end
+
+  def name
+    first_name + " #{last_name}"
   end
 
   private

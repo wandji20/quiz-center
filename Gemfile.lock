@@ -96,6 +96,7 @@ GEM
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.2)
+    jwt (2.3.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -120,6 +121,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.4.7)
@@ -213,9 +216,11 @@ DEPENDENCIES
   byebug
   factory_bot_rails (~> 6.2)
   faker!
+  jwt
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
+  rack-cors
   rails (~> 6.1.4, >= 6.1.4.7)
   rspec-rails (~> 5.1, >= 5.1.1)
   rubocop (>= 1.0, < 2.0)

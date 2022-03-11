@@ -40,7 +40,8 @@ RSpec.describe 'AnsweredQuestions', type: :request do
     context 'valid cattributes' do
       it 'returns http success' do
         post answered_questions_path, params: valid_attributes, headers: header, as: :json
-        expect(response.body).to match(/timer started/)
+        answered_question_id = AnsweredQuestion.last.id
+        expect(response.body).to match(answered_question_id.to_s)
         expect(response).to have_http_status(:created)
       end
     end

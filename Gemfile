@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.1'
 
-gem 'action-cable-testing'
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
 gem 'jwt'
@@ -45,6 +44,7 @@ group :development do
 end
 
 group :test do
+  gem 'action-cable-testing'
   gem 'shoulda-matchers', '~> 5.0'
 end
 

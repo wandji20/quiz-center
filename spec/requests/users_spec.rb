@@ -22,6 +22,8 @@ RSpec.describe 'Users', type: :request do
       }
     }
   end
+  let(:user) { create(:user)}
+  let(:header) { valid_headers(user.id)}
   describe 'POST /create' do
     context 'valid attributes' do
       it 'returns http success' do
@@ -52,4 +54,5 @@ RSpec.describe 'Users', type: :request do
   #     expect(response).to have_http_status(:success)
   #   end
   # end
+
 end

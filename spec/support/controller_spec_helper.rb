@@ -10,7 +10,7 @@ module ControllerSpecHelper
   def valid_headers(id)
     {
       Authorization: generate_token(id),
-      'Content-Type': 'applicaton/json'
+      'Content-Type': 'application/json'
     }
   end
 

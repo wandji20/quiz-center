@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
+  let(:quiz) { create(:quiz) }
+
+  let(:question) do
+    Question.create!(quiz: quiz,
+                     description: 'Which number is divisible by 2 and 3',
+                     answers_attributes: [
+                       { value: 1 },
+                       { value: 2 },
+                       { value: 3 },
+                       { value: 4 },
+                       { value: 6, is_correct: true }
+                     ])
+  end
   let(:valid_attributes) do
     {
       user: {
@@ -27,9 +40,12 @@ RSpec.describe 'Users', type: :request do
   describe 'POST /create' do
     context 'valid attributes' do
       it 'returns http success' do
+        question
         post sign_up_path, params: valid_attributes, as: :json
         expect(response.body).to match(/Authorization/)
         expect(response).to have_http_status(:success)
+        expect(response.body).to match(User.last.name)
+        expect(response.body).to match(question.id.to_s)
       end
     end
 

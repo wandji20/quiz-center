@@ -5,10 +5,14 @@ class AuthenticationController < ApplicationController
     token = AuthenticateUser.call(
       authentication_params[:email], authentication_params[:password]
     )
+    @user = User.find_by(email: authentication_params[:email])
     user = ActiveModelSerializers::Adapter::Json.new(
-      UserSerializer.new(User.find_by(email: authentication_params[:email]))
+      UserSerializer.new(@user)
     ).serializable_hash
-    json_response({ Authorization: token, user: user })
+    quizzes = ActiveModelSerializers::SerializableResource.new(
+      Quiz.all, scope: @user, each_serilalizer: QuizSerializer
+    ).as_json
+    json_response({ Authorization: token, user: user, quizzes: quizzes })
   end
 
   private

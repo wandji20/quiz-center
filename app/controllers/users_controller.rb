@@ -5,7 +5,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id)
-      json_response({ Authorization: token }, :created)
+      user = ActiveModelSerializers::Adapter::Json.new(
+        UserSerializer.new(@user)
+      ).serializable_hash
+      quizzes = ActiveModelSerializers::SerializableResource.new(
+        Quiz.all, scope: @user, each_serilalizer: QuizSerializer
+      ).as_json
+      json_response({ Authorization: token, user: user, quizzes: quizzes }, :created)
     else
       json_response({ errors: @user.errors.full_messages }, :unprocessable_entity)
     end

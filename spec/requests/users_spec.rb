@@ -14,11 +14,11 @@ RSpec.describe 'Users', type: :request do
                        { value: 6, is_correct: true }
                      ])
   end
-  let(:answered_question) { 
+  let(:answered_question) do
     AnsweredQuestion.create(
       quiz: quiz, user: user, answer: question.answers.last, question: question
     )
-  }
+  end
   let(:valid_attributes) do
     {
       user: {
@@ -73,8 +73,8 @@ RSpec.describe 'Users', type: :request do
     it 'returns http success' do
       answered_question
       get result_path, headers: header
-      expect(response.body).to match(/score\":1/)
-        expect(response).to have_http_status(:success)
+      expect(response.body).to match(/score":1/)
+      expect(response).to have_http_status(:success)
     end
   end
 end

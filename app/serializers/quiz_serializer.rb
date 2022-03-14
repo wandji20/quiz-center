@@ -1,5 +1,4 @@
 class QuizSerializer < ActiveModel::Serializer
-
   attributes :id, :title
   attribute :question_ids, if: -> { scope }
 
@@ -11,5 +10,4 @@ class QuizSerializer < ActiveModel::Serializer
   def current_user
     scope
   end
-
 end

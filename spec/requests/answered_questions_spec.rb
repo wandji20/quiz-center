@@ -20,7 +20,8 @@ RSpec.describe 'AnsweredQuestions', type: :request do
     {
       answered_question: {
         question_id: question.id,
-        answer_id: question.answers.last.id
+        answer_id: question.answers.last.id,
+        quiz_id: quiz.id
       }
     }
   end
@@ -34,7 +35,9 @@ RSpec.describe 'AnsweredQuestions', type: :request do
   end
 
   let(:header) { valid_headers(user.id) }
-  let(:answered_question) { AnsweredQuestion.create!(question_id: question.id, user_id: user.id) }
+  let(:answered_question) do
+    AnsweredQuestion.create!(question_id: question.id, user_id: user.id, quiz: quiz)
+  end
 
   describe 'POST /create' do
     context 'valid cattributes' do

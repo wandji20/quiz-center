@@ -36,6 +36,6 @@ class AnsweredQuestionsController < ApplicationController
   private
 
   def answered_question_params
-    params.require(:answered_question).permit(:question_id, :answer_id)
+    params.require(:answered_question).permit(:question_id, :answer_id, :quiz_id)
   end
 end

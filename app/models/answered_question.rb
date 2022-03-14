@@ -3,7 +3,10 @@ class AnsweredQuestion < ApplicationRecord
 
   belongs_to :user
   belongs_to :question
+  belongs_to :quiz
   belongs_to :answer, optional: true
+
+  scope :correct, -> { joins(:answer).where(answer: { is_correct: true }) }
 
   private
 

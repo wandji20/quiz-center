@@ -17,7 +17,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    attempted_total = current_user.answered_questions.group(:quiz_id).count
+    correct_total = current_user.answered_questions.correct.group(:quiz_id).count
+    grouped_total = attempted_total.map do |key, value|
+       { quiz_id: key, attempted: value, score: correct_total[key] || 0 }
+    end
+    render json: { result: grouped_total }, status: :ok
+  end
 
   private
 

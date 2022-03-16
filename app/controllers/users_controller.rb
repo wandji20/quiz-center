@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       ).as_json
       json_response({ Authorization: token, user: user, quizzes: quizzes }, :created)
     else
-      json_response({ errors: @user.errors.full_messages }, :unprocessable_entity)
+      json_response({ errors: @user.errors }, :unprocessable_entity)
     end
   end
 

@@ -1,12 +1,12 @@
 class AnsweredQuestionsController < ApplicationController
   def create
     @answered_question = current_user.answered_questions.build(answered_question_params)
-    if @answered_question.save
+    if @answered_question.valid?
       question = ActiveModelSerializers::Adapter::Json.new(
         QuestionSerializer.new(@answered_question.question)
       )
       ActionCable.server.broadcast(
-        "answered_question_#{@answered_question.id}", question
+        "answered_question_#{current_user.email}", question
       )
       json_response(
         { answered_question_id: @answered_question.id }, :created
@@ -25,7 +25,7 @@ class AnsweredQuestionsController < ApplicationController
     )
     if outcome.valid?
       ActionCable.server.broadcast(
-        "answered_question_#{params[:id]}", { notice: 'saved' }
+        "answered_question_#{current_user.email}", { notice: 'saved' }
       )
       json_response({ notice: 'saved' })
     else

@@ -3,7 +3,7 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      self.current_user = AuthorizeApiRequest.call(request.headers)[:user]
+      self.current_user = AuthorizeCableRequest.call(request.params[:token])
     end
   end
 end

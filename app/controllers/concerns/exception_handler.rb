@@ -27,6 +27,6 @@ module ExceptionHandler
   def require_param!(error)
     message_prefix = error.instance_of?(String) ? error : error.param.to_s.humanize
     message = message_prefix + " #{Message.missing_param}"
-    json_response({ error: message }, 400)
+    json_response({ alert: message }, 400)
   end
 end

@@ -7,6 +7,8 @@ class Quiz < ApplicationRecord
 
   has_many :questions, dependent: :destroy
 
+  default_scope { order(title: :desc)}
+
   private
 
   def downcase_title

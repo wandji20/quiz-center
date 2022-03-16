@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :name, :gravatar_url
+  attributes :name, :gravatar_url, :email
 
   def name
     object.name

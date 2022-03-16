@@ -158,6 +158,7 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.6.0)
     regexp_parser (2.2.1)
     rexml (3.2.5)
     rspec-core (3.11.0)
@@ -225,6 +226,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.7)
+  redis (~> 4.0)
   rspec-rails (~> 5.1, >= 5.1.1)
   rubocop (>= 1.0, < 2.0)
   shoulda-matchers (~> 5.0)

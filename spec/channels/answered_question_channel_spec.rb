@@ -32,6 +32,6 @@ RSpec.describe AnsweredQuestionChannel, type: :channel do
 
   it 'does not subscribe to a stream when answered question id is not provided' do
     subscribe(id: 'abc')
-    expect(subscription).to_not have_stream_from("answered_question_#{answered_question.id}")
+    expect(subscription).to_not have_stream_from("answered_question_#{user.email}")
   end
 end

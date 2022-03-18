@@ -6,10 +6,10 @@ class AuthorizeCableRequest
   end
 
   def self.call(token)
-    self.new(token).call
+    new(token).user
   end
 
-  def call
+  def user
     @user ||= User.find_by(id: decoded_auth_token[:user_id])
   end
 

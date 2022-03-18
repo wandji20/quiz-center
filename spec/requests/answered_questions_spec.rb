@@ -50,14 +50,14 @@ RSpec.describe 'AnsweredQuestions', type: :request do
     end
 
     context 'already exist' do
-      let(:attributes) {
+      let(:attributes) do
         {
-          answered_question: { 
+          answered_question: {
             question_id: question.id,
             quiz_id: quiz.id
           }
         }
-      }
+      end
       it 'response with test OK' do
         answered_question
         post answered_questions_path, params: attributes, headers: header, as: :json

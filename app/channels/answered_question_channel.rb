@@ -9,9 +9,9 @@ class AnsweredQuestionChannel < ApplicationCable::Channel
     answered_question = current_user.answered_questions.find_by(
       id: answered_question_id
     )
-    answered_question.update(answer_id: answer_id, answered_at: DateTime.now);
+    answered_question.update(answer_id: answer_id, answered_at: DateTime.now)
   end
- 
+
   # def unsubscribed
   #   # Any cleanup needed when channel is unsubscribed
   # end

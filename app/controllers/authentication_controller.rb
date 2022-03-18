@@ -16,7 +16,6 @@ class AuthenticationController < ApplicationController
   end
 
   def show
- 
     user = ActiveModelSerializers::Adapter::Json.new(
       UserSerializer.new(current_user)
     ).serializable_hash

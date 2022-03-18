@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.1'
 
 gem 'active_model_serializers', '~> 0.10.13'
+gem 'apipie-rails'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
 gem 'jwt'
 gem 'rubocop', '>= 1.0', '< 2.0'

@@ -2,6 +2,14 @@ class AnsweredQuestionsController < ApplicationController
   include Broadcast
   before_action :verify_answered_question_existence, only: :create
 
+  api :POST, '/answered_questions', 'Initiate an answerd question'
+  header :Authorization, 'Authentication token', required: true
+  param :answered_question, Hash, 'Answered Question', required: true do
+    param :question_id, Integer, desc: 'id of the question', required: true
+    param :quiz_id, Integer, desc: 'id of the question', required: true
+    param :answer_id, Integer, desc: 'id of the question'
+  end
+
   def create
     @answered_question = current_user.answered_questions.build(answered_question_params)
     if @answered_question.save
@@ -17,6 +25,11 @@ class AnsweredQuestionsController < ApplicationController
     end
   end
 
+  api :PUT, '/answered_questions/id', 'Update existing answerd question'
+  header :Authorization, 'Authentication token', required: true
+  param :answered_question, Hash, 'Answered Question', required: true do
+    param :answer_id, Integer, desc: 'id of the question', required: true
+  end
   def update
     outcome = AnsweredQuestions::Update.call(
       answered_question_params.slice(:answer_id, {}).merge!(id: params[:id])

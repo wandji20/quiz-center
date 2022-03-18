@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  apipie
   mount ActionCable.server => '/cable'
   
   root to: 'quizzes#index'

@@ -13,5 +13,10 @@ class AnsweredQuestion < ApplicationRecord
   def validate_answered_at
     time_exceeded = DateTime.now.to_i > question.points.minutes.to_i + created_at.to_i
     errors.add(:base, 'time limit exceeded') if time_exceeded
+    return if created_at == updated_at
+
+    errors.add(
+      :base, 'Can\'t submit answer twice for thesesame question'
+    )
   end
 end

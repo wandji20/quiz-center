@@ -4,12 +4,14 @@ class AnsweredQuestionChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    p 'kkkkkkkkkkkkkk'
-    p data
-    answered_question = current_user.answered_questions.build(data['answered_question'])
-    p answered_question
+    answer_id = data['answer_id']&.to_i
+    answered_question_id = data['answered_question_id']&.to_i
+    answered_question = current_user.answered_questions.find_by(
+      id: answered_question_id
+    )
+    answered_question.update(answer_id: answer_id, answered_at: DateTime.now);
   end
-
+ 
   # def unsubscribed
   #   # Any cleanup needed when channel is unsubscribed
   # end

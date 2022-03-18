@@ -49,10 +49,34 @@ RSpec.describe 'AnsweredQuestions', type: :request do
       end
     end
 
+    context 'already exist' do
+      let(:attributes) {
+        {
+          answered_question: { 
+            question_id: question.id,
+            quiz_id: quiz.id
+          }
+        }
+      }
+      it 'response with test OK' do
+        answered_question
+        post answered_questions_path, params: attributes, headers: header, as: :json
+        expect(response.body).to match(/Ok/)
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'broadcast existing answered question' do
+        answered_question
+        expect do
+          post answered_questions_path, params: attributes, headers: header, as: :json
+        end.to have_broadcasted_to("answered_question_#{user.email}").from_channel(AnsweredQuestionChannel)
+      end
+    end
+
     context 'invalid cattributes' do
       it 'returns http 422 error' do
         post answered_questions_path,
-             params: { answered_question: { question_id: 'ao' } },
+             params: { answered_question: { question_id: 0 } },
              headers: header, as: :json
         expect(response.body).to match(/Question must exist/)
         expect(response).to have_http_status(:unprocessable_entity)

@@ -12,7 +12,7 @@ class AuthenticationController < ApplicationController
     quizzes = ActiveModelSerializers::SerializableResource.new(
       Quiz.all, scope: @user, each_serilalizer: QuizSerializer
     ).as_json
-    json_response({ Authorization: token, user: user, quizzes: quizzes })
+    json_response({ Authorization: token, user: user[:user], quizzes: quizzes })
   end
 
   def show

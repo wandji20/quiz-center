@@ -46,13 +46,13 @@ questions = [
   {
     quiz: mathematics,
     description: 'What is 302 in base 4?',
-    points: 1.5,
+    points: 2,
     answers_attributes: [
-      {value: '00301 base 4'},
+      {value: '102323 base 4'},
       {value: '1030 base 4'},
-      {value: '103000 base 4'},
+      {value: '102332 base 4'},
       {value: 'none'},
-      {value: '10300 base 4', is_correct: true}
+      {value: '10232 base 4', is_correct: true }
     ]
   }, 
   
@@ -70,7 +70,7 @@ questions = [
   
   {
     quiz: mathematics,
-    description: 'what is the square root of zero?',
+    description: 'What is the square root of zero?',
     answers_attributes: [
       {value: '0', is_correct: true},
       {value: '1'},
@@ -82,7 +82,7 @@ questions = [
   
   {
     quiz: mathematics,
-    description: 'what is the 11th element of the sequence 1, 1/4, 1/9,..',
+    description: 'The 11th element of the sequence 1, 1/4, 1/9,.. is?',
     points: 1.5,
     answers_attributes: [
       {value: '2/242', is_correct: true},
@@ -155,7 +155,7 @@ questions = [
   
   { 
     quiz: geography,
-    description: 'what is the highest mountain Africa?',
+    description: 'What is the highest mountain Africa?',
     answers_attributes: [
       {value: 'Mt Kilimanjaro', is_correct: true},
       {value: 'Mt Cameroon'},
@@ -179,7 +179,7 @@ questions = [
   
   { 
     quiz: geography,
-    description: 'where is the Kalahari desert found?',
+    description: 'Where is the Kalahari desert found?',
     answers_attributes: [
       {value: 'North Africa'},
       {value: 'South America'},
@@ -227,7 +227,7 @@ questions = [
   
   {
     quiz: football,
-    description: 'For which club does Neymar Jr play?',
+    description: 'For which club does Neymar Jr play as of March 2022?',
     answers_attributes: [
       {value: 'Inter'},
       {value: 'Santos'},
@@ -263,7 +263,7 @@ questions = [
   
   {
     quiz: football,
-    description: 'Who is the manager of chelsea?',
+    description: 'The manager of chelsea in December 2021 is?',
     answers_attributes: [
       {value: 'Frank Lampard', is_correct: true},
       {value: 'Antonio Conte'},

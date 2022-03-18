@@ -1,13 +1,11 @@
 class AnsweredQuestionsController < ApplicationController
+  include Broadcast
+  before_action :verify_answered_question_existence, only: :create
+  
   def create
     @answered_question = current_user.answered_questions.build(answered_question_params)
-    if @answered_question.valid?
-      question = ActiveModelSerializers::Adapter::Json.new(
-        QuestionSerializer.new(@answered_question.question)
-      )
-      ActionCable.server.broadcast(
-        "answered_question_#{current_user.email}", question
-      )
+    if @answered_question.save
+      send_broadcast(@answered_question)
       json_response(
         { answered_question_id: @answered_question.id }, :created
       )

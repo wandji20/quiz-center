@@ -3,12 +3,20 @@ class AnsweredQuestion < ApplicationRecord
 
   belongs_to :user
   belongs_to :question
+  belongs_to :quiz
   belongs_to :answer, optional: true
+
+  scope :correct, -> { joins(:answer).where(answer: { is_correct: true }) }
 
   private
 
   def validate_answered_at
     time_exceeded = DateTime.now.to_i > question.points.minutes.to_i + created_at.to_i
     errors.add(:base, 'time limit exceeded') if time_exceeded
+    return if created_at == updated_at
+
+    errors.add(
+      :base, 'Can\'t submit answer twice for thesesame question'
+    )
   end
 end

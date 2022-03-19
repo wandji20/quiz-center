@@ -32,15 +32,21 @@ To get a local copy up and running follow these simple example steps.
 
 ### Setup
 
-> Open your terminal and run the following commands <br> > `git clonehttps://github.com/wandji20/repairs-invoice.git` <br> > `cd repairs-invoice` <br>
+> Open your terminal and run the following commands <br> > `git clone https://github.com/wandji20/quiz-center-api.git` <br> > `cd quiz-center-api` <br>
 
 ### Install
 
-run `bundle install`
+run
 
-### Usage
+- `bundle install`
+- `rails db:create`
+- `rails db:migrate`
+- `rails db:seed`
+- `rails s`
 
-run `rails s` <br>
+### Test
+
+run `rspec`
 
 ## Author
 

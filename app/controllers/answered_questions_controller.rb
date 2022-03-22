@@ -13,7 +13,7 @@ class AnsweredQuestionsController < ApplicationController
   def create
     @answered_question = current_user.answered_questions.build(answered_question_params)
     if @answered_question.save
-      send_broadcast(@answered_question, status: true)
+      BroadcastJob.perform_async(@answered_question.id, current_user.id, true)
       json_response(
         { answered_question_id: @answered_question.id }, :created
       )
@@ -30,19 +30,19 @@ class AnsweredQuestionsController < ApplicationController
   param :answered_question, Hash, 'Answered Question', required: true do
     param :answer_id, Integer, desc: 'id of the question', required: true
   end
-  def update
-    outcome = AnsweredQuestions::Update.call(
-      answered_question_params.slice(:answer_id, {}).merge!(id: params[:id])
-    )
-    if outcome.valid?
-      ActionCable.server.broadcast(
-        "answered_question_#{current_user.email}", { notice: 'saved' }
-      )
-      json_response({ notice: 'saved' })
-    else
-      json_response({ errors: outcome.errors }, :unprocessable_entity)
-    end
-  end
+  # def update
+  #   outcome = AnsweredQuestions::Update.call(
+  #     answered_question_params.slice(:answer_id, {}).merge!(id: params[:id])
+  #   )
+  #   if outcome.valid?
+  #     ActionCable.server.broadcast(
+  #       "answered_question_#{current_user.email}", { notice: 'saved' }
+  #     )
+  #     json_response({ notice: 'saved' })
+  #   else
+  #     json_response({ errors: outcome.errors }, :unprocessable_entity)
+  #   end
+  # end
 
   private
 

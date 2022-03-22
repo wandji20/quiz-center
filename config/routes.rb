@@ -1,4 +1,10 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  Sidekiq::Web.use ActionDispatch::Cookies
+  Sidekiq::Web.use Rails.application.config.session_store, Rails.application.config.session_options
+
+  mount Sidekiq::Web => "/sidekiq"
 
   apipie
   mount ActionCable.server => '/cable'

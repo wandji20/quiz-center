@@ -86,6 +86,7 @@ GEM
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     diff-lcs (1.5.0)
     erubi (1.10.0)
@@ -194,6 +195,10 @@ GEM
     ruby-progressbar (1.11.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
+    sidekiq (6.4.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spring (4.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
@@ -233,6 +238,7 @@ DEPENDENCIES
   rspec-rails (~> 5.1, >= 5.1.1)
   rubocop (>= 1.0, < 2.0)
   shoulda-matchers (~> 5.0)
+  sidekiq (~> 6.4, >= 6.4.1)
   spring
   tzinfo-data
 

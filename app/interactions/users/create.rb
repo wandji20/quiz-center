@@ -18,7 +18,7 @@ module Users
         ).as_json
         { Authorization: token, user: user, quizzes: quizzes }
       else
-        errors.merge(new_user.errors)
+        errors.merge!(new_user.errors)
       end
     end
 

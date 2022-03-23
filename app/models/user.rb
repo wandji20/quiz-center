@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true,
                        length: { in: 2..50 },
-                       format: { with: /\A[^0-9`!@#$%\^&*+_=]+\z/ }
+                       format: { with: /\A[a-zA-Z0-9`!@#$%\^&*+_]+\Z/ }  
   validates :email,
             presence: true,
             uniqueness: true,

@@ -1,16 +1,6 @@
 module Broadcast
   extend ActiveSupport::Concern
 
-  def send_broadcast(answered_question, status)
-    answered_question = ActiveModelSerializers::Adapter::Json.new(
-      AnsweredQuestionSerializer.new(answered_question)
-    )
-    ActionCable.server.broadcast(
-      "answered_question_#{current_user.email}",
-      { answered_question: answered_question, status: status }
-    )
-  end
-
   def verify_answered_question_existence
     answered_question = current_user.answered_questions.where(
       'question_id = ? AND quiz_id = ?',
@@ -20,6 +10,6 @@ module Broadcast
     return unless answered_question
 
     json_response({ notice: 'Ok' })
-    send_broadcast(answered_question, false)
+    BroadcastJob.perform_async(answered_question.id, current_user.id, false)
   end
 end

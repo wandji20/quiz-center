@@ -36,7 +36,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   config.action_cable.url = 'wss://quiz-center-api.herokuapp.com/cable'
-  config.action_cable.allowed_request_origins = [ 'http://localhost:3000', /http:\/\/localhost:3000.*/, 'https://quiz-center-front.herokuapp.com' ]
+  config.action_cable.allowed_request_origins = [ 'http://localhost:3000', /http:\/\/localhost:3000.*/, 'https://quiz-center-front.herokuapp.com', 'http://quiz-center-front.herokuapp.com', /http:\/\/quiz-center-front.herokuapp.com*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -52,7 +52,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter     = :sidekiq
   # config.active_job.queue_name_prefix = "quiz_center_api_production"
 
   config.action_mailer.perform_caching = false

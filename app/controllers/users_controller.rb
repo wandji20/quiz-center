@@ -11,21 +11,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      token = JsonWebToken.encode(user_id: @user.id)
-
-      user = ActiveModelSerializers::Adapter::Json.new(
-        UserSerializer.new(@user)
-      ).serializable_hash
-
-      quizzes = ActiveModelSerializers::SerializableResource.new(
-        Quiz.all, scope: @user, each_serilalizer: QuizSerializer
-      ).as_json
-
-      json_response({ Authorization: token, user: user, quizzes: quizzes }, :created)
+    outcome = Users::Create.run(user_params)
+    if outcome.valid?
+      json_response(outcome.result, :created)
     else
-      json_response({ errors: @user.errors }, :unprocessable_entity)
+      json_response({ errors: outcome.errors }, :unprocessable_entity)
     end
   end
 
@@ -33,7 +23,7 @@ class UsersController < ApplicationController
   header :Authorization, 'Authentication token', required: true
   def show
     result = current_user.result
-    render json: { resul: result }, status: :ok
+    render json: { result: result }, status: :ok
   end
 
   private

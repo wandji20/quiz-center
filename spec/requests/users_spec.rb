@@ -62,7 +62,7 @@ RSpec.describe 'Users', type: :request do
 
       it 'returns http unprocessable entity' do
         post sign_up_path, params: invalid_attributes, as: :json
-        expect(response.body).to match(/can't be blank/)
+        expect(response.body).to match(/is required/)
         expect(response).to have_http_status(422)
       end
     end

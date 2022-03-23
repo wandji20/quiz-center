@@ -1,7 +1,6 @@
 class AuthenticationController < ApplicationController
   skip_before_action :authenticate_request, only: :create
 
-
   api :POST, '/login', 'Initiate an answerd question'
   param :authentication, Hash, 'Authentication', required: true do
     param :email, String, 'email', required: true
@@ -37,7 +36,7 @@ class AuthenticationController < ApplicationController
     quizzes = ActiveModelSerializers::SerializableResource.new(
       Quiz.all, scope: current_user, each_serilalizer: QuizSerializer
     ).as_json
-    
+
     json_response({ user: user[:user], quizzes: quizzes })
   end
 

@@ -12,7 +12,7 @@ module Users
         user = ActiveModelSerializers::Adapter::Json.new(
           UserSerializer.new(new_user)
         ).serializable_hash
-  
+
         quizzes = ActiveModelSerializers::SerializableResource.new(
           Quiz.all, scope: new_user, each_serilalizer: QuizSerializer
         ).as_json
@@ -21,7 +21,7 @@ module Users
         errors.merge(new_user.errors)
       end
     end
-    
+
     def new_user
       payload = inputs.slice(:email, :username, :password, :password_confirmation)
       @new_user ||= User.new(payload)

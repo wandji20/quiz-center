@@ -69,9 +69,9 @@ RSpec.describe 'AnsweredQuestions', type: :request do
     context 'invalid cattributes' do
       it 'returns http 422 error' do
         post answered_questions_path,
-             params: { answered_question: { question_id: 0 } },
+             params: { answered_question: { quiz_id: quiz.id } },
              headers: header, as: :json
-        expect(response.body).to match(/Question must exist/)
+        expect(response.body).to match(/Question is required/)
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

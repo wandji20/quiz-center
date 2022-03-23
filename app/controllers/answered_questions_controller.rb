@@ -11,17 +11,14 @@ class AnsweredQuestionsController < ApplicationController
   end
 
   def create
-    @answered_question = current_user.answered_questions.build(answered_question_params)
-    if @answered_question.save
-      BroadcastJob.perform_async(@answered_question.id, current_user.id, true)
-      json_response(
-        { answered_question_id: @answered_question.id }, :created
-      )
+    payload = answered_question_params.merge(user: current_user)
+    payload = answered_question_params.merge(user: current_user)
+    outcome = AnsweredQuestions::Create.run(payload)
+    
+    if outcome.valid?
+      json_response({ answered_question_id: outcome.result.id }, :created)
     else
-      json_response(
-        { errors: @answered_question.errors.full_messages },
-        :unprocessable_entity
-      )
+      json_response({ errors: outcome.errors.full_messages }, :unprocessable_entity)
     end
   end
 

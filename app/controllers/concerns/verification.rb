@@ -10,6 +10,8 @@ module Verification
     return unless answered_question
 
     json_response({ notice: 'Ok' })
-    BroadcastJob.perform_async(answered_question.id, current_user.id, false)
+    BroadcastJob.perform_async(
+      answered_question.id, current_user.id, answered_question.updatable?
+    )
   end
 end

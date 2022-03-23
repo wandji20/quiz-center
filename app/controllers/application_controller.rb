@@ -1,3 +1,4 @@
+# rubocop:disable Naming/MemoizedInstanceVariableName
 class ApplicationController < ActionController::API
   include Response
   include ExceptionHandler
@@ -8,8 +9,7 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    # rubocop:disable Naming/MemoizedInstanceVariableName
-    @current_user ||= AuthorizeApiRequest.call(request.headers)[:user]
-    # rubocop:enable Naming/MemoizedInstanceVariableName
+    @current_user ||= AuthorizeApiRequest.call(request.headers)
   end
 end
+# rubocop:enable Naming/MemoizedInstanceVariableName

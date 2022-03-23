@@ -5,7 +5,7 @@ class Quiz < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
 
-  has_many :questions, dependent: :destroy
+  has_many :questions, -> { includes(:answers) }, dependent: :destroy
 
   default_scope { order(title: :desc) }
 

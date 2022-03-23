@@ -22,8 +22,7 @@ RSpec.describe 'Users', type: :request do
   let(:valid_attributes) do
     {
       user: {
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
+        username: Faker::Name.first_name,
         email: Faker::Internet.email,
         password: 'password',
         password_confirmation: 'password'
@@ -49,7 +48,7 @@ RSpec.describe 'Users', type: :request do
         post sign_up_path, params: valid_attributes, as: :json
         expect(response.body).to match(/Authorization/)
         expect(response).to have_http_status(:success)
-        expect(response.body).to match(User.last.name)
+        expect(response.body).to match(User.last.username)
         expect(response.body).to match(question.id.to_s)
       end
     end
@@ -63,7 +62,7 @@ RSpec.describe 'Users', type: :request do
 
       it 'returns http unprocessable entity' do
         post sign_up_path, params: invalid_attributes, as: :json
-        expect(response.body).to match(/can't be blank/)
+        expect(response.body).to match(/is required/)
         expect(response).to have_http_status(422)
       end
     end

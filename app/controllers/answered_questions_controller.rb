@@ -12,9 +12,8 @@ class AnsweredQuestionsController < ApplicationController
 
   def create
     payload = answered_question_params.merge(user: current_user)
-    payload = answered_question_params.merge(user: current_user)
     outcome = AnsweredQuestions::Create.run(payload)
-    
+
     if outcome.valid?
       json_response({ answered_question_id: outcome.result.id }, :created)
     else

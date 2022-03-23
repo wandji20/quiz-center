@@ -10,6 +10,8 @@ module AnsweredQuestions
       @answered_question = user.answered_questions.build(payload)
       if @answered_question.save
         BroadcastJob.perform_async(@answered_question.id, user.id, true)
+      else
+        errors.merge!(@answered_question.errors)
       end
       @answered_question
     end

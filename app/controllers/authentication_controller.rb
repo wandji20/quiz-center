@@ -8,36 +8,16 @@ class AuthenticationController < ApplicationController
   end
 
   def create
-    token = AuthenticateUser.call(
-      authentication_params[:email], authentication_params[:password]
-    )
-
-    @user = User.find_by(email: authentication_params[:email])
-
-    user = ActiveModelSerializers::Adapter::Json.new(
-      UserSerializer.new(@user)
-    ).serializable_hash
-
-    quizzes = ActiveModelSerializers::SerializableResource.new(
-      Quiz.all, scope: @user, each_serilalizer: QuizSerializer
-    ).as_json
-
-    json_response({ Authorization: token, user: user[:user], quizzes: quizzes })
+    outcome = Authentication::Create.run(authentication_params)
+    json_response(outcome.result)
   end
 
   api :GET, '/home', 'User Details'
   header :Authorization, 'Authentication token', required: true
 
   def show
-    user = ActiveModelSerializers::Adapter::Json.new(
-      UserSerializer.new(current_user)
-    ).serializable_hash
-
-    quizzes = ActiveModelSerializers::SerializableResource.new(
-      Quiz.all, scope: current_user, each_serilalizer: QuizSerializer
-    ).as_json
-
-    json_response({ user: user[:user], quizzes: quizzes })
+    outcome = Authentication::Show.run({ current_user: current_user })
+    json_response(outcome.result)
   end
 
   private

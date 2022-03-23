@@ -1,5 +1,5 @@
 class AnsweredQuestionsController < ApplicationController
-  include Broadcast
+  include Verification
   before_action :verify_answered_question_existence, only: :create
 
   api :POST, '/answered_questions', 'Initiate an answerd question'
@@ -24,25 +24,6 @@ class AnsweredQuestionsController < ApplicationController
       )
     end
   end
-
-  api :PUT, '/answered_questions/id', 'Update existing answerd question'
-  header :Authorization, 'Authentication token', required: true
-  param :answered_question, Hash, 'Answered Question', required: true do
-    param :answer_id, Integer, desc: 'id of the question', required: true
-  end
-  # def update
-  #   outcome = AnsweredQuestions::Update.call(
-  #     answered_question_params.slice(:answer_id, {}).merge!(id: params[:id])
-  #   )
-  #   if outcome.valid?
-  #     ActionCable.server.broadcast(
-  #       "answered_question_#{current_user.email}", { notice: 'saved' }
-  #     )
-  #     json_response({ notice: 'saved' })
-  #   else
-  #     json_response({ errors: outcome.errors }, :unprocessable_entity)
-  #   end
-  # end
 
   private
 

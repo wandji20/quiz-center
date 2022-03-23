@@ -23,6 +23,14 @@ class User < ApplicationRecord
     Question.where.not(id: answered_question_ids)
   end
 
+  def result
+    attempted_total = answered_questions.group(:quiz_id).count
+    correct_total = answered_questions.correct.group(:quiz_id).count
+    grouped_total = attempted_total.map do |key, value|
+      { quiz_id: key, attempted: value, score: correct_total[key] || 0 }
+    end
+  end
+
   private
 
   def downcase_email

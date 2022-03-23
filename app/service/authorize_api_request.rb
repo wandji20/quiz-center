@@ -6,13 +6,7 @@ class AuthorizeApiRequest
   end
 
   def self.call(headers = {})
-    new(headers).assign_user
-  end
-
-  def assign_user
-    {
-      user: user
-    }
+    new(headers).user
   end
 
   def user

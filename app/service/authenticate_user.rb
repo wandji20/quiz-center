@@ -1,4 +1,6 @@
 class AuthenticateUser
+  attr_reader :email, :password
+  
   def initialize(email, password)
     @email = email
     @password = password
@@ -14,7 +16,6 @@ class AuthenticateUser
 
   private
 
-  attr_reader :email, :password
 
   def user
     @user ||= User.find_by(email: email)

@@ -36,7 +36,7 @@ RSpec.describe 'Authentications', type: :request do
         question
         post login_path, params: valid_attributes
         expect(response.body).to match(/Authorization/)
-        expect(response.body).to match(user.name)
+        expect(response.body).to match(user.username)
         expect(response.body).to match(question.id.to_s)
         expect(response).to have_http_status(:success)
       end

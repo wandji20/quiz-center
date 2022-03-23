@@ -1,4 +1,4 @@
-module Broadcast
+module Verification
   extend ActiveSupport::Concern
 
   def verify_answered_question_existence

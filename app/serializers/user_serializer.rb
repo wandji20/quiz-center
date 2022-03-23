@@ -1,9 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :name, :gravatar_url, :email
+  attributes :username, :gravatar_url, :email
 
-  def name
-    object.name
-  end
 
   def gravatar_url
     email = object&.email&.downcase || ''

@@ -12,14 +12,6 @@ class AuthenticationController < ApplicationController
     json_response(outcome.result)
   end
 
-  api :GET, '/home', 'User Details'
-  header :Authorization, 'Authentication token', required: true
-
-  def show
-    outcome = Authentication::Show.run({ current_user: current_user })
-    json_response(outcome.result)
-  end
-
   private
 
   def authentication_params

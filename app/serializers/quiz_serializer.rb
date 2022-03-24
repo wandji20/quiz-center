@@ -5,7 +5,7 @@ class QuizSerializer < ActiveModel::Serializer
   def question_ids
     if current_user
       unanswered_question_ids = current_user.unanswered_questions.ids
-      object.questions.where(id: unanswered_question_ids).ids
+      Question.joins(:quiz).where(quiz: { id: object.id }).where(id: unanswered_question_ids).ids
     else
       []
     end

@@ -1,3 +1,4 @@
+# renders json response with passed payload
 module Response
   extend ActiveSupport::Concern
 

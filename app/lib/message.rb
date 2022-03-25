@@ -1,3 +1,4 @@
+# Default messages used by exception handlers
 class Message
   class << self
     def invalid_credentials

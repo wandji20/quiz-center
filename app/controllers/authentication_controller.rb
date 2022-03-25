@@ -8,6 +8,7 @@ class AuthenticationController < ApplicationController
   end
 
   def create
+    # call interactions/authentication/create
     outcome = Authentication::Create.run(authentication_params)
     json_response(outcome.result)
   end

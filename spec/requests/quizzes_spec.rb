@@ -22,6 +22,7 @@ RSpec.describe 'Quizzes', type: :request do
       get root_path, headers: header
       expect(response).to have_http_status(:success)
       expect(response.body).to match(quiz.title)
+      expect(response.body).to match(user.email)
     end
   end
 end

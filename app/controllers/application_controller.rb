@@ -8,6 +8,7 @@ class ApplicationController < ActionController::API
 
   private
 
+  # authorize jwt and assign a current user
   def authenticate_request
     @current_user ||= AuthorizeApiRequest.call(request.headers)
   end

@@ -12,6 +12,7 @@ class AnsweredQuestionsController < ApplicationController
 
   def create
     payload = answered_question_params.merge(user: current_user)
+    # call interactions/answered_questions/create
     outcome = AnsweredQuestions::Create.run(payload)
 
     if outcome.valid?

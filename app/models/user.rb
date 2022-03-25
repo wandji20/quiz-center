@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true,
                        length: { in: 2..50 },
-                       format: { with: /\A[^0-9`!@#$%\^&*+_=]+\z/ }
+                       format: { with: /\A[a-zA-Z0-9`!@#$%\^&*+_]+\Z/ }
   validates :email,
             presence: true,
             uniqueness: true,
@@ -18,11 +18,14 @@ class User < ApplicationRecord
 
   has_many :answered_questions
 
+  # query all questions that have not been answered bu user
   def unanswered_questions
     answered_question_ids = answered_questions.pluck(:question_id)
     Question.where.not(id: answered_question_ids)
   end
 
+  # users answered questions by quiz and map as result key and group user correct answered
+  # questions by quiz and map as result value
   def result
     attempted_total = answered_questions.group(:quiz_id).count
     correct_total = answered_questions.correct.group(:quiz_id).count

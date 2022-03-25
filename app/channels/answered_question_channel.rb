@@ -1,8 +1,10 @@
 class AnsweredQuestionChannel < ApplicationCable::Channel
+  # Open unique stream for answered question channel with the email of authenticated user
   def subscribed
     stream_from "answered_question_#{params[:email]}"
   end
 
+  # Updates answered question answer attribute
   def receive(data)
     answer_id = data['answer_id']&.to_i
     answered_question_id = data['answered_question_id']&.to_i

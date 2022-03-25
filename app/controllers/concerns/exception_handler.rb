@@ -1,3 +1,4 @@
+# handle exceptions raised during runtime
 module ExceptionHandler
   extend ActiveSupport::Concern
 

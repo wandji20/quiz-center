@@ -1,5 +1,5 @@
 class AnsweredQuestion < ApplicationRecord
-  validate :validate_answered_at, on: :update
+  validate :answered_at, on: :update
 
   belongs_to :user
   belongs_to :question
@@ -14,7 +14,8 @@ class AnsweredQuestion < ApplicationRecord
 
   private
 
-  def validate_answered_at
+  # enforce validation when updating an answered question or when updation for after the first time
+  def answered_at
     errors.add(:base, 'time limit exceeded') unless updatable?
     return if created_at == updated_at
 

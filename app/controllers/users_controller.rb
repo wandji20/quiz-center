@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    # call interactions/users/create
     outcome = Users::Create.run(user_params)
     if outcome.valid?
       json_response(outcome.result, :created)

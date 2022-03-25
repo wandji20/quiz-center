@@ -50,24 +50,4 @@ RSpec.describe 'Authentications', type: :request do
       end
     end
   end
-
-  describe 'GET /show' do
-    context 'valid attributes' do
-      it 'returns http success' do
-        question
-        get home_path, headers: headers
-        expect(response.body).to match(question.id.to_s)
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context 'invalid headers' do
-      it 'returns http unprocessable entity' do
-        question
-        get home_path
-        expect(response.body).to match(/Missing token/)
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
 end

@@ -1,3 +1,5 @@
+# verify if signed in user already has an answered question with params question_id and params quiz_id.
+# broadcasts' answsered question if it already exist
 module Verification
   extend ActiveSupport::Concern
 
@@ -11,7 +13,7 @@ module Verification
 
     json_response({ notice: 'Ok' })
     BroadcastJob.perform_async(
-      answered_question.id, current_user.id, answered_question.updatable?
+      answered_question.id, current_user.id
     )
   end
 end

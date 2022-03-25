@@ -2,10 +2,11 @@ class QuizSerializer < ActiveModel::Serializer
   attributes :id, :title
   attribute :question_ids
 
+  # assign only quiz questions that have not been answered by the user
   def question_ids
     if current_user
       unanswered_question_ids = current_user.unanswered_questions.ids
-      object.questions.where(id: unanswered_question_ids).ids
+      Question.joins(:quiz).where(quiz: { id: object.id }).where(id: unanswered_question_ids).ids
     else
       []
     end

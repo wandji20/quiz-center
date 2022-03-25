@@ -3,6 +3,7 @@ module Authentication
     string :email
     string :password
 
+    # Authenticate user with email and password and returns JWT user and quizzes as result
     def execute
       token = AuthenticateUser.call(email, password)
 

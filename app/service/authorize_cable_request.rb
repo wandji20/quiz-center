@@ -9,10 +9,12 @@ class AuthorizeCableRequest
     new(token).user
   end
 
+  # assign user from decoded authorization token
   def user
     @user ||= User.find_by(id: decoded_auth_token[:user_id])
   end
 
+  # decode authorization token
   def decoded_auth_token
     JsonWebToken.decode(token)
   end

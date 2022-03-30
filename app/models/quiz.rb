@@ -7,7 +7,7 @@ class Quiz < ApplicationRecord
 
   has_many :questions, -> { includes(:answers) }, dependent: :destroy
 
-  default_scope { order(title: :desc) }
+  default_scope { includes(:questions).order(title: :desc) }
 
   private
 

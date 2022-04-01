@@ -8,7 +8,8 @@ module Types
       description: 'unique id of unanswered questions'
 
     def question_ids
-      if current_user
+      current_user = context[:current_user]
+      if current_user.present?
         unanswered_question_ids = current_user.unanswered_questions.ids
         Question.joins(:quiz).where(quiz: { id: object.id }).where(id: unanswered_question_ids).ids
       else

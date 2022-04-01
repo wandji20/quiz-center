@@ -15,7 +15,7 @@ module Types
     field :question, Types::QuestionType do
       argument :id, ID, required: true
     end
-    
+
     def users
       User.all
     end

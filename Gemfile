@@ -3,12 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.1'
 
-gem "graphiql-rails"
-gem "graphql"
 gem 'active_interaction', '~> 4.1'
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'apipie-rails'
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
+gem 'graphiql-rails'
+gem 'graphql'
 gem 'jwt'
 gem 'rubocop', '>= 1.0', '< 2.0'
 gem 'sidekiq', '~> 6.4', '>= 6.4.1'

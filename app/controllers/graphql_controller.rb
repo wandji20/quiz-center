@@ -5,8 +5,6 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
 
-  def current_user; end
-
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
@@ -48,6 +46,6 @@ class GraphqlController < ApplicationController
     logger.error error.message
     logger.error error.backtrace.join("\n")
 
-    render json: { errors: [{ message: e.message, backtrace: error.backtrace }], data: {} }, status: 500
+    render json: { errors: [{ message: error.message, backtrace: error.backtrace }], data: {} }, status: 500
   end
 end

@@ -10,7 +10,7 @@ class Message
     end
 
     def missing_token
-      'Missing token'
+      'Missing/Invalid token'
     end
 
     def unauthorized

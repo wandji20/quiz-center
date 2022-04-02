@@ -41,4 +41,8 @@ class QuizCenterApiSchema < GraphQL::Schema
     full_global_id = "gid://#{GlobalID.app}/#{id}"
     GlobalID::Locator.locate(full_global_id)
   end
+
+  def self.unauthorized_object(error)
+    raise GraphQL::ExecutionError, Message.missing_token
+  end
 end

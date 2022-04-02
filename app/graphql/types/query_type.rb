@@ -7,7 +7,7 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :quizzes, [Types::QuizType], null: false
+    field :quizzes, [Types::QuizType]
     field :users, [Types::UserType], null: false
     field :user, Types::UserType do
       argument :id, ID, required: true
@@ -30,6 +30,16 @@ module Types
 
     def question(id:)
       Question.find_by(id: id)
+    end
+
+    def self.authorized?(object, context)
+      current_user = context[:current_user]
+      super && current_user&.present?
+    end
+
+    def self.authorized?(object, context)
+      current_user = context[:current_user]
+      super && current_user&.present?
     end
   end
 end

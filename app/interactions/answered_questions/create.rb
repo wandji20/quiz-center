@@ -12,6 +12,7 @@ module AnsweredQuestions
     # successfully created or merges errors to interaction object
     def execute
       return existing_answered_question if verify_existence?
+      
       payload = inputs.slice(:question_id, :quiz_id)
       @answered_question = user.answered_questions.build(payload)
       @answered_question.save

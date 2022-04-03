@@ -19,9 +19,9 @@ module Mutations
 
       def new_answered_question(payload)
         outcome = ::AnsweredQuestions::Create.run(payload)
-
-        raise GraphQL::ExecutionError, outcome.errors unless outcome.valid?
-
+        p '>>>>>>>>>>>>>>>>'
+        p outcome.valid?
+        p outcome.result
         { answered_question: outcome.result }
       end
 

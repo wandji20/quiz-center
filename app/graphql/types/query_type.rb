@@ -7,15 +7,15 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :quizzes, [Types::QuizType]
-    field :user, Types::UserType do
+    field :quizzes, [Query::QuizType]
+    field :user, Query::UserType do
       argument :id, ID, required: true
     end
-    field :question, Types::QuestionType do
+    field :question, Query::QuestionType do
       argument :id, ID, required: true
     end
 
-    field :answered_question, Types::AnsweredQuestionType do
+    field :answered_question, Query::AnsweredQuestionType do
       argument :id, ID, required: true
     end
 

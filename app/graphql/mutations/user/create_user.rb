@@ -3,8 +3,8 @@ module Mutations
     
     field :token, String, null: false
     field :user, ::Types::Query::UserType, null: false
-    field :quizzes, [::Types::Query::QuizType]
-    field :errors, [String], null: false
+    field :quizzes, [::Types::Query::QuizType], null: false
+    field :errors, [String]
 
     argument :username, String, required: true
     argument :email, String, required: true
@@ -19,6 +19,10 @@ module Mutations
         password: password, 
         password_confirmation: password_confirmation 
       }
+      new_user(payload)
+    end
+
+    def new_user(payload)
       outcome = ::Users::Create.run(payload)
       if outcome.valid?
         context[:current_user] = outcome.result[:user]
@@ -26,7 +30,7 @@ module Mutations
           token: outcome.result[:token], user: outcome.result[:user], quizzes: Quiz.all
         }
       else
-        raise GraphQL::ExecutionError, outcome.errors.full_messages
+        raise GraphQL::ExecutionError, outcome.errors
       end
     end
   end

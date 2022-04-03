@@ -9,18 +9,21 @@ class AuthorizeApiRequest
     new(headers).user
   end
 
-  # assign user from decoded authorization token or raise error
+  # assign user from decoded authorization token or nil if no header or invalid token
   def user
-    @user ||= User.find(decoded_auth_token[:user_id])
-  rescue ActiveRecord::RecordNotFound
-    raise ExceptionHandler::InvalidToken, Message.invalid_token
+    return unless header_is_present?
+    return unless decoded_auth_token
+    @user ||= User.find_by_id(decoded_auth_token[:user_id])
+  end
+
+  # check wether header header is present an not blank
+  def header_is_present?
+    !!headers[:Authorization]&.blank?
   end
 
   # grab authorization token from header or raise error
   def http_header_token
-    return headers[:Authorization].split.last if headers[:Authorization]&.present?
-
-    raise ExceptionHandler::MissingToken, Message.missing_token
+    headers[:Authorization].split.last
   end
 
   # decode authorization token

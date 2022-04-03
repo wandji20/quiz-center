@@ -10,15 +10,7 @@ module Users
     def execute
       if new_user.save
         token = JsonWebToken.encode(user_id: new_user.id)
-
-        user = ActiveModelSerializers::Adapter::Json.new(
-          UserSerializer.new(new_user)
-        ).serializable_hash
-
-        quizzes = ActiveModelSerializers::SerializableResource.new(
-          Quiz.all, scope: new_user, each_serilalizer: QuizSerializer
-        ).as_json
-        { Authorization: token, user: user, quizzes: quizzes }
+        { user: new_user, token: token }
       else
         errors.merge!(new_user.errors)
       end

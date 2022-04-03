@@ -13,6 +13,7 @@ class AuthorizeApiRequest
   def user
     return unless header_is_present?
     return unless decoded_auth_token
+
     @user ||= User.find_by_id(decoded_auth_token[:user_id])
   end
 

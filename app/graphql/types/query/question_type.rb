@@ -8,8 +8,8 @@ module Types
       field :points, Integer, null: false,
                               description: 'question difficulty level and duration'
       field :answers, [AnswerType], null: false,
-                                           description: 'question answers'
-  
+                                    description: 'question answers'
+
       def answers
         object.answers
       end

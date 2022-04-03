@@ -42,7 +42,7 @@ class QuizCenterApiSchema < GraphQL::Schema
     GlobalID::Locator.locate(full_global_id)
   end
 
-  def self.unauthorized_object(error)
+  def self.unauthorized_object(_error)
     raise GraphQL::ExecutionError, Message.missing_token
   end
 end

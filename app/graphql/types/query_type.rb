@@ -39,10 +39,5 @@ module Types
       current_user = context[:current_user]
       super && current_user&.present?
     end
-
-    def self.authorized?(object, context)
-      current_user = context[:current_user]
-      super && current_user&.present?
-    end
   end
 end

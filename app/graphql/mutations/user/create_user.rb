@@ -23,7 +23,6 @@ module Mutations
   
       def new_user(payload)
         outcome = ::Users::Create.run(payload)
-        raise GraphQL::ExecutionError, outcome.errors unless outcome.valid?
   
         context[:current_user] = outcome.result[:user]
         {

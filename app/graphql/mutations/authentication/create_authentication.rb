@@ -11,7 +11,6 @@ module Mutations
 
       def resolve(email:, password:)
         token = AuthenticateUser.call(email, password)
-        # outcome = ::Authentication::Create.run({ email: email, password: password })
         user = User.find_by(email: email)
         context[:current_user] = user
         { token: token, user: user, quizzes: Quiz.all }

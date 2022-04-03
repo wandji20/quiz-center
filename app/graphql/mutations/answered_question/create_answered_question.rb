@@ -19,9 +19,7 @@ module Mutations
 
       def new_answered_question(payload)
         outcome = ::AnsweredQuestions::Create.run(payload)
-        p '>>>>>>>>>>>>>>>>'
-        p outcome.valid?
-        p outcome.result
+
         { answered_question: outcome.result }
       end
 

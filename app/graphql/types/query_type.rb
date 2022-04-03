@@ -8,7 +8,6 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :quizzes, [Types::QuizType]
-    field :users, [Types::UserType], null: false
     field :user, Types::UserType do
       argument :id, ID, required: true
     end
@@ -16,8 +15,8 @@ module Types
       argument :id, ID, required: true
     end
 
-    def users
-      User.all
+    field :answered_question, Types::AnsweredQuestionType do
+      argument :id, ID, required: true
     end
 
     def quizzes
@@ -30,6 +29,10 @@ module Types
 
     def question(id:)
       Question.find_by(id: id)
+    end
+
+    def answered_question(id:)
+      AnsweredQuestion.find_by(id: id)
     end
 
     def self.authorized?(object, context)

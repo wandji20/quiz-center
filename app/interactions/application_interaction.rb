@@ -2,6 +2,7 @@ class ApplicationInteraction < ActiveInteraction::Base
   set_callback :execute, :after, :raise_error
 
   private
+
   def invalid?
     errors.any?
   end

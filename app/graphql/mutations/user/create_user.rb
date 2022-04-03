@@ -5,12 +5,12 @@ module Mutations
       field :user, ::Types::Query::UserType, null: false
       field :quizzes, [::Types::Query::QuizType], null: false
       field :errors, [String]
-  
+
       argument :username, String, required: true
       argument :email, String, required: true
       argument :password, String, required: true
       argument :password_confirmation, String, required: true
-  
+
       def resolve(username:, email:, password:, password_confirmation:)
         payload = {
           username: username,
@@ -20,10 +20,10 @@ module Mutations
         }
         new_user(payload)
       end
-  
+
       def new_user(payload)
         outcome = ::Users::Create.run(payload)
-  
+
         context[:current_user] = outcome.result[:user]
         {
           token: outcome.result[:token], user: outcome.result[:user], quizzes: Quiz.all

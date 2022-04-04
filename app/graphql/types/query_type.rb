@@ -19,6 +19,8 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :results, [String]
+
     def quizzes
       Quiz.all
     end
@@ -33,6 +35,11 @@ module Types
 
     def answered_question(id:)
       AnsweredQuestion.find_by(id: id)
+    end
+
+    def result
+      current_user = context[:current_user]
+      current_user.result
     end
 
     def self.authorized?(object, context)

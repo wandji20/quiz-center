@@ -14,7 +14,7 @@ module Mutations
           user: context[:current_user]
         }
         outcome = ::AnsweredQuestions::Update.run(payload)
-  
+
         { answered_question: outcome.result }
       end
     end

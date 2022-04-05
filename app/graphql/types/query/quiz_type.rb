@@ -5,7 +5,7 @@ module Types
                      description: 'unique quiz id'
       field :title, String, null: false,
                             description: 'unique title for quiz'
-      field :question_ids, [ID], null: false,
+      field :question_ids, [Int], null: false,
                                  description: 'unique id of unanswered questions'
 
       def question_ids

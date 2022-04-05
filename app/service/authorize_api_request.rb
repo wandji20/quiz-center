@@ -19,7 +19,7 @@ class AuthorizeApiRequest
 
   # check wether header header is present an not blank
   def header_is_present?
-    !!headers[:Authorization]&.blank?
+    !headers[:Authorization]&.blank?
   end
 
   # grab authorization token from header or raise error

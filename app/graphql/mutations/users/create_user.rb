@@ -1,6 +1,6 @@
 module Mutations
-  module User
-    class User::CreateUser < BaseMutation
+  module Users
+    class CreateUser < BaseMutation
       field :token, String, null: false
       field :user, ::Types::Query::UserType, null: false
       field :quizzes, [::Types::Query::QuizType], null: false

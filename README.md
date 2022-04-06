@@ -9,16 +9,11 @@
 ## Built With
 
 - Ruby on Rails
-- Action cable
-- Redis
+- GraphQL
 
 ## Live Demo
 
 [Live Demo Link](https://quiz-center-api.herokuapp.com)
-
-## API documentation
-
-[Docs](https://quiz-center-api.herokuapp.com/doc)
 
 ## Getting Started
 
@@ -28,7 +23,6 @@ To get a local copy up and running follow these simple example steps.
 
 - ruby v2.7 and above
 - rails v6 and above
-- Redis installed locally
 
 ### Setup
 
@@ -43,6 +37,8 @@ run
 - `rails db:migrate`
 - `rails db:seed`
 - `rails s`
+
+> open `http://localhost:3000/graphiql` and try out some GraphQL operations
 
 ### Test
 

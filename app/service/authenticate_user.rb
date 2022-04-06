@@ -21,6 +21,6 @@ class AuthenticateUser
     @user ||= User.find_by(email: email)
     return @user if @user&.authenticate(password)
 
-    raise ExceptionHandler::AuthenticationError, Message.invalid_credentials
+    raise GraphQL::ExecutionError, Message.invalid_credentials
   end
 end

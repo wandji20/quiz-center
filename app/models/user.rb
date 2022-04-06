@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  has_many :answered_questions
+  has_many :answered_questions, dependent: :destroy
 
   # query all questions that have not been answered bu user
   def unanswered_questions

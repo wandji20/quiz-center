@@ -1,7 +1,5 @@
 # rubocop:disable Naming/MemoizedInstanceVariableName
 class ApplicationController < ActionController::API
-  include Response
-  include ExceptionHandler
   before_action :authenticate_request
 
   attr_accessor :current_user

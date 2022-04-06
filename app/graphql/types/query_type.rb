@@ -8,7 +8,7 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :quizzes, [Query::QuizType]
-    field :user, Query::UserType 
+    field :user, Query::UserType
 
     field :question, Query::QuestionType do
       argument :id, ID, required: true

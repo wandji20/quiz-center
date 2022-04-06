@@ -7,7 +7,7 @@ module Types
                                    description: 'user gravatar url'
       field :username, String,
             description: 'users username or null if not present'
-      
+
       def gravatar_url
         email = object&.email&.downcase || ''
         gravatar_id = Digest::MD5.hexdigest(email)

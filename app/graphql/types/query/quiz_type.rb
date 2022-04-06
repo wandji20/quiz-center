@@ -6,7 +6,7 @@ module Types
       field :title, String, null: false,
                             description: 'unique title for quiz'
       field :question_ids, [Int], null: false,
-                                 description: 'unique id of unanswered questions'
+                                  description: 'unique id of unanswered questions'
 
       def question_ids
         current_user = context[:current_user]

@@ -19,8 +19,8 @@ module Mutations
 
       def new_answered_question(payload)
         outcome = ::AnsweredQuestions::Create.run(payload)
-        { 
-          answered_question: outcome.result, 
+        {
+          answered_question: outcome.result,
           question: Question.find_by(id: payload[:question_id])
         }
       end
